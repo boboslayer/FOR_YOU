@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>I Love You Too</title>
   <style>
     body {
@@ -10,24 +10,28 @@
       overflow: hidden;
       background-color: #fff0f5;
       font-family: 'Arial', sans-serif;
-      position: relative;
       height: 100vh;
       width: 100vw;
+      position: relative;
     }
 
     .text {
       position: absolute;
-      white-space: nowrap;
       font-weight: bold;
       color: #e91e63;
-      animation-name: moveText;
+      white-space: nowrap;
       animation-timing-function: linear;
       animation-iteration-count: infinite;
     }
 
-    @keyframes moveText {
-      0% { transform: translateX(-120%); }
-      100% { transform: translateX(120%); }
+    @keyframes moveRight {
+      0% { transform: translateX(-150%); }
+      100% { transform: translateX(150%); }
+    }
+
+    @keyframes moveLeft {
+      0% { transform: translateX(150%); }
+      100% { transform: translateX(-150%); }
     }
 
     .main-text {
@@ -37,21 +41,45 @@
       transform: translate(-50%, -50%);
       font-size: 6vw;
       font-weight: bold;
-      text-align: center;
       color: #d81b60;
-      animation: moveMain 10s linear infinite alternate;
+      animation: float 10s ease-in-out infinite alternate;
+      text-align: center;
     }
 
-    @keyframes moveMain {
-      0% { transform: translate(-50%, -50%) translateX(-20px); }
-      100% { transform: translate(-50%, -50%) translateX(20px); }
+    @keyframes float {
+      0% { transform: translate(-50%, -50%) translateY(-10px); }
+      100% { transform: translate(-50%, -50%) translateY(10px); }
+    }
+
+    #playBtn {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 20px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
   </style>
 </head>
 <body>
+
   <div class="main-text">I love you too ❤️</div>
+  <button id="playBtn">Play Music 🎵</button>
+
+  <!-- Audio -->
+  <audio id="bgMusic" loop>
+    <source src="Screenrecording_20250727_023944.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <script>
-    const count = 20;
+    const count = 30;
     const body = document.body;
 
     for (let i = 0; i < count; i++) {
@@ -59,23 +87,36 @@
       text.classList.add("text");
       text.textContent = "I love you too 💖";
 
-      const fontSize = Math.floor(Math.random() * 10) + 10;
+      // Ukuran font acak
+      const fontSize = Math.floor(Math.random() * 16) + 10;
       text.style.fontSize = fontSize + "px";
 
-      const top = Math.floor(Math.random() * 100);
+      // Posisi acak
+      const top = Math.random() * 100;
+      const left = Math.random() * 100;
       text.style.top = top + "vh";
+      text.style.left = left + "vw";
 
-      const speed = Math.random() * 10 + 5;
-      text.style.animationDuration = speed + "s";
+      // Arah gerak acak
+      const animationName = Math.random() > 0.5 ? "moveRight" : "moveLeft";
+      text.style.animationName = animationName;
 
-      text.style.animationDelay = Math.random() * 5 + "s";
+      // Kecepatan acak
+      const duration = Math.random() * 10 + 5;
+      text.style.animationDuration = duration + "s";
 
       body.appendChild(text);
     }
+
+    // Tombol Play Music
+    const playBtn = document.getElementById("playBtn");
+    const bgMusic = document.getElementById("bgMusic");
+
+    playBtn.addEventListener("click", () => {
+      bgMusic.play();
+      playBtn.style.display = "none";
+    });
   </script>
-  <audio autoplay loop>
-  <source src="Screenrecording_20250727_023944.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-  </audio>
+
 </body>
 </html>
