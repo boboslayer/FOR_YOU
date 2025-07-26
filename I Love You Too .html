@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>I Love You Too - Mobile</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #fff0f5;
+      font-family: 'Arial', sans-serif;
+      position: relative;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .text {
+      position: absolute;
+      white-space: nowrap;
+      font-weight: bold;
+      color: #e91e63;
+      animation-name: moveText;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    @keyframes moveText {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    .main-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 6vw;
+      font-weight: bold;
+      text-align: center;
+      color: #d81b60;
+      animation: moveMain 10s linear infinite alternate;
+    }
+
+    @keyframes moveMain {
+      0% { transform: translate(-50%, -50%) translateX(-20px); }
+      100% { transform: translate(-50%, -50%) translateX(20px); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Teks utama -->
+  <div class="main-text">I love you too ❤️</div>
+
+  <!-- Script spam teks -->
+  <script>
+    const count = 20; // jumlah teks (disesuaikan untuk HP)
+    const body = document.body;
+
+    for (let i = 0; i < count; i++) {
+      const text = document.createElement("div");
+      text.classList.add("text");
+      text.textContent = "I love you too 💖";
+
+      // Ukuran random
+      const fontSize = Math.floor(Math.random() * 10) + 10; // 10px–20px
+      text.style.fontSize = fontSize + "px";
+
+      // Posisi vertikal acak
+      const top = Math.floor(Math.random() * 100);
+      text.style.top = top + "vh";
+
+      // Kecepatan random
+      const speed = Math.random() * 10 + 5; // 5s–15s
+      text.style.animationDuration = speed + "s";
+
+      // Delay random
+      text.style.animationDelay = Math.random() * 5 + "s";
+
+      body.appendChild(text);
+    }
+  </script>
+</body>
+</html>
