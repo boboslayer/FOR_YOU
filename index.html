@@ -53,7 +53,7 @@
 
     #playBtn {
       position: absolute;
-      bottom: 20px;
+      top: 20px;
       left: 50%;
       transform: translateX(-50%);
       padding: 12px 20px;
@@ -64,13 +64,14 @@
       font-size: 16px;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
     }
   </style>
 </head>
 <body>
 
-  <div class="main-text">I love you too ❤️</div>
   <button id="playBtn">Play Music 🎵</button>
+  <div class="main-text">I love you too ❤️</div>
 
   <!-- Audio -->
   <audio id="bgMusic" loop>
